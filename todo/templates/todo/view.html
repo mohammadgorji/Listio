@@ -1,0 +1,23 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+View
+{% endblock %}
+
+{% block content %}
+    <h2>Your Lists</h2>
+    <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th class='font-weight-bolder text-center text-muted'>List Name</th>
+          </tr>
+        </thead>
+        <tbody>  
+            {% for td in user.todolist.all %}
+              <tr>
+                <td style="font-size: larger;"><a href="{% url 'todo:list' td.id %}" class="text-decoration-none text-white">{{td.name}}</a></tr>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

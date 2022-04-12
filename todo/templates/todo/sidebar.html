@@ -1,0 +1,11 @@
+<span style="cursor:pointer; width: 200px;" class="btn btn-secondary btn-sm ml-0 rounded-0" onclick="openNav()">&#9776; Side Manager</span>
+<div id="mySidenav" class="sidenav ml-3 font-weight-bolder">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{% url 'todo:home' %}"><i class="fas fa-home"></i> Home</a>
+        <a href="{% url 'profile' %}"> <i class="fa fa-user mr-1"></i> Profile </a>
+        <p>------------------------------</p>
+        <a href="{% url 'todo:create' %}"><i class="fa fa-plus"></i> New List</a>
+        <a href="{% url 'todo:view' %}"><i class="fas fa-tasks"></i> Your Lists</a>
+        <p>------------------------------</p>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+</div>

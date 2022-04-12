@@ -1,0 +1,47 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="{% url 'todo:home' %}">
+        <img src="{% static 'img/site_logo.png' %}" width="40" height="35" class="d-inline-block align-top mx-2" alt="">  Listio  
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link pl-lg-4" href="{% url 'todo:home' %}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'todo:about' %}">About Us</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'todo:create' %}">Create a new list</a>
+                    <a class="dropdown-item" href="{% url 'todo:view' %}">Show exiting lists</a>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="m-lg-2 pr-lg-4 font-italic text-white"> 
+                <img class="rounded-circle account-img mr-2" src="{{ user.profile.image.url }}" width="50" height="50">
+            {{user.get_username}}'s Profile
+        </a>
+        {% endif %}
+        <form class="form-inline my-2 my-lg-0">
+            {% if user.is_authenticated %}
+                <p class="mt-2"><a class="btn btn-outline-info" style="margin-right:8px"; href="{% url 'logout' %}">Log Out</a></p>
+            {% else %}
+                <p class="pt-2 mx-2" ><a class="btn btn-outline-info" href="{% url 'login' %}">Log in</a></p>
+                <p class="pt-2 mx-2"><a class="btn btn-outline-info" href="{% url 'register' %}">Sign up</a></p>
+            {% endif %}
+        </form>
+    </div>
+</nav>

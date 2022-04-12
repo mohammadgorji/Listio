@@ -1,0 +1,14 @@
+{% extends 'todo/base.html' %}
+{% block title %} Create New List {% endblock %}
+{% block content %}
+     <h3>New list</h3>
+     <form method="post" action="{% url 'todo:create' %}" class="form-group">
+         {% csrf_token %}
+         <div class="input-group mb-3">
+             <div class="input-group-prepend">
+                 <button type="submit" name="save" class="btn btn-outline-success">Create</button>
+             </div>
+             {{form.name}}
+         </div>
+    </form>
+{% endblock %}

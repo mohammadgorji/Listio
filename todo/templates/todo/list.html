@@ -1,0 +1,41 @@
+{% extends "todo/base.html" %}
+{% block title %}View List{% endblock %}
+ 
+{% block content %}
+	<h1>{{ls.name}}</h1>
+	<form method="post" action="#">
+		{% csrf_token %}
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<button type="submit" name="newItem" value="newItem" class="btn btn-outline-primary">Add</button>
+			</div>
+			<input type="text" name="new" value="  Item  " onfocus="this.value=''">
+			<input type="number" name="priority" value="1" max='10' min="1" onfocus="this.value=''">
+		</div>
+		{% for item in ls.item_set.all %}
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					{% if item.complete == True %}
+						<input type="checkbox" value="clicked" name="c{{item.id}}" checked>
+					{% else %}
+						<input type="checkbox" value="clicked" name="c{{item.id}}">
+					{% endif %}
+				</div>
+			</div>
+			<input type="text" value="{{item.text}}" name="t{{item.id}}" class="form-control">
+			<input type="text" value="{{item.date_added}}" name="d{{item.id}}" class="form-control">
+			<input type="text" value="{{item.priority}}" name="p{{item.id}}" class="form-control">
+			
+			<div class="input-group-append">
+				<span class="input-group-text"><a href="{% url 'todo:delete' item.id %}">Delete Item</a></span>
+			</div>
+		</div>
+		{% endfor %}
+ 
+
+ 
+		<button type="submit" name="save" value="save" class="btn btn-outline-success">Save the changes</button>
+		<button type="submit" name="delete" value="delete" class="btn btn-danger">Delete the entire list</button>
+	</form>
+{% endblock %}
